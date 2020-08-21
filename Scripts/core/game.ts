@@ -8,24 +8,16 @@ let Game = (function(){
 
     let dice1Label: UIObjects.Label;
     let dice2Label: UIObjects.Label;
-    let exampleButton: UIObjects.Button;  
-    let one: Core.GameObject;
-    let two: Core.GameObject;
-    let three: Core.GameObject;
-    let four: Core.GameObject;
-    let five: Core.GameObject;
-    let six: Core.GameObject;
-    let backButton: UIObjects.Button;
     let background: Core.GameObject;
     let blank1: Core.GameObject;
     let blank2: Core.GameObject;
-    let button: UIObjects.Button;
-    let nextButton: UIObjects.Button;
-    let placeholder: Core.GameObject;
-    let resetButton: UIObjects.Button;
     let rollButton: UIObjects.Button;
-    let startButton: UIObjects.Button;
-    let startOverButton: UIObjects.Button;
+
+    if (!createjs.Sound.initializeDefaultPlugins()) { return; }
+
+    let diceSound = {id: "dice", src: "./Assets/sounds/dice.ogg"};
+
+    createjs.Sound.alternateExtensions = ["mp3"];
 
     let assetManifest = 
     [
@@ -35,16 +27,12 @@ let Game = (function(){
         {id:"4", src:"./Assets/images/4.png"},
         {id:"5", src:"./Assets/images/5.png"},
         {id:"6", src:"./Assets/images/6.png"},
-        {id:"backButton", src:"./Assets/images/startButton.png"},
         {id:"background", src:"./Assets/images/background.png"},
         {id:"blank", src:"./Assets/images/blank.png"},
         {id:"button", src:"./Assets/images/button.png"},
         {id:"nextButton", src:"./Assets/images/nextButton.png"},
-        {id:"placeholder", src:"./Assets/images/placeholder.png"},
         {id:"resetButton", src:"./Assets/images/resetButton.png"},
-        {id:"rollButton", src:"./Assets/images/rollButton.png"},
-        {id:"startButton", src:"./Assets/images/startButton.png"},
-        {id:"startOverButton", src:"./Assets/images/startOverButton.png"}
+        {id:"rollButton", src:"./Assets/images/rollButton.png"}
     ];
 
     function Preload():void
@@ -53,6 +41,7 @@ let Game = (function(){
         assets = new createjs.LoadQueue(); // asset container 
         assets.installPlugin(createjs.Sound); // supports sound preloading
         assets.loadManifest(assetManifest);
+        assets.loadManifest(diceSound);
         assets.on("complete", Start);
     }
 
@@ -109,7 +98,7 @@ let Game = (function(){
         dice2Label = new UIObjects.Label("0", "20px", "Consolas", "#000000", Config.Game.CENTER_X + 120, Config.Game.CENTER_Y + 40, true);
         stage.addChild(dice2Label);
 
-        rollButton = new UIObjects.Button("rollButton", Config.Game.CENTER_X, Config.Game.CENTER_Y + 100, true);
+        rollButton = new UIObjects.Button("rollButton", Config.Game.CENTER_X, Config.Game.CENTER_Y + 150, true);
         stage.addChild(rollButton);
     }
 
@@ -124,6 +113,8 @@ let Game = (function(){
 
             dice1Label.setText(dice1.toString());
             dice2Label.setText(dice2.toString());
+
+            createjs.Sound.play(diceSound.src);
         });
     }
 
