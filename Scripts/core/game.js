@@ -73,6 +73,7 @@ let Game = (function () {
     function Main() {
         console.log(`%c Main Function`, "color: grey; font-size: 14px; font-weight: bold;");
         gameInterface();
+        gameInterfaceLogic();
     }
     function gameInterface() {
         background = new Core.GameObject('background', Config.Game.CENTER_X, Config.Game.CENTER_Y, true);
@@ -87,6 +88,30 @@ let Game = (function () {
         stage.addChild(dice2Label);
         rollButton = new UIObjects.Button("rollButton", Config.Game.CENTER_X, Config.Game.CENTER_Y + 100, true);
         stage.addChild(rollButton);
+    }
+    function gameInterfaceLogic() {
+        rollButton.on("click", () => {
+            let dice1 = Math.round(Util.Mathf.RandomRange(1, 5));
+            let dice2 = Math.round(Util.Mathf.RandomRange(1, 5));
+            changeDiceImage(dice1, 1, blank1);
+            changeDiceImage(dice2, 2, blank2);
+            dice1Label.setText(dice1.toString());
+            dice2Label.setText(dice2.toString());
+        });
+    }
+    function changeDiceImage(dice, dice_NO, target) {
+        let x = 0;
+        let y = 0;
+        if (dice_NO === 1) {
+            x = Config.Game.CENTER_X - 120;
+            y = Config.Game.CENTER_Y - 70;
+        }
+        else {
+            x = Config.Game.CENTER_X + 120;
+            y = Config.Game.CENTER_Y - 70;
+        }
+        target = new Core.GameObject(dice.toString(), x, y, true);
+        stage.addChild(target);
     }
     window.addEventListener('load', Preload);
 })();
