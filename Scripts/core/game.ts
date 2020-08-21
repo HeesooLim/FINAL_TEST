@@ -1,3 +1,11 @@
+/*
+    Author: Heesoo Lim
+    studentID: 301061152
+    Date: August 21, 2020
+    File Name: game.ts
+    File Description: core ts file for dice roller
+*/
+
 let Game = (function(){
 
     // variable declarations
@@ -12,8 +20,6 @@ let Game = (function(){
     let blank1: Core.GameObject;
     let blank2: Core.GameObject;
     let rollButton: UIObjects.Button;
-
-    if (!createjs.Sound.initializeDefaultPlugins()) { return; }
 
     let diceSound = {id: "dice", src: "./Assets/sounds/dice.ogg"};
 
@@ -81,6 +87,7 @@ let Game = (function(){
         gameInterfaceLogic();
     }
 
+    // contains all elements that are needed for dice roller page
     function gameInterface()
     {
         background = new Core.GameObject('background', Config.Game.CENTER_X, Config.Game.CENTER_Y, true);
@@ -102,6 +109,7 @@ let Game = (function(){
         stage.addChild(rollButton);
     }
 
+    // logic for the interface
     function gameInterfaceLogic()
     {
         rollButton.on("click", ()=>{
@@ -118,6 +126,7 @@ let Game = (function(){
         });
     }
 
+    // change the image of dice according to the number
     function changeDiceImage(dice: number, dice_NO: number, target: Core.GameObject)
     {
         let x: number = 0;

@@ -1,4 +1,11 @@
 "use strict";
+/*
+    Author: Heesoo Lim
+    studentID: 301061152
+    Date: August 21, 2020
+    File Name: game.ts
+    File Description: core ts file for dice roller
+*/
 let Game = (function () {
     // variable declarations
     let canvas = document.getElementsByTagName('canvas')[0];
@@ -10,9 +17,6 @@ let Game = (function () {
     let blank1;
     let blank2;
     let rollButton;
-    if (!createjs.Sound.initializeDefaultPlugins()) {
-        return;
-    }
     let diceSound = { id: "dice", src: "./Assets/sounds/dice.ogg" };
     createjs.Sound.alternateExtensions = ["mp3"];
     let assetManifest = [
@@ -63,6 +67,7 @@ let Game = (function () {
         gameInterface();
         gameInterfaceLogic();
     }
+    // contains all elements that are needed for dice roller page
     function gameInterface() {
         background = new Core.GameObject('background', Config.Game.CENTER_X, Config.Game.CENTER_Y, true);
         stage.addChild(background);
@@ -77,6 +82,7 @@ let Game = (function () {
         rollButton = new UIObjects.Button("rollButton", Config.Game.CENTER_X, Config.Game.CENTER_Y + 150, true);
         stage.addChild(rollButton);
     }
+    // logic for the interface
     function gameInterfaceLogic() {
         rollButton.on("click", () => {
             let dice1 = Math.round(Util.Mathf.RandomRange(1, 5));
@@ -88,6 +94,7 @@ let Game = (function () {
             createjs.Sound.play(diceSound.src);
         });
     }
+    // change the image of dice according to the number
     function changeDiceImage(dice, dice_NO, target) {
         let x = 0;
         let y = 0;
