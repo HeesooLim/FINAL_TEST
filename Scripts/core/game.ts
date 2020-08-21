@@ -43,7 +43,6 @@ let Game = (function(){
 
     function Preload():void
     {
-        console.log(`%c Preload Function`, "color: grey; font-size: 14px; font-weight: bold;");
         assets = new createjs.LoadQueue(); // asset container 
         assets.installPlugin(createjs.Sound); // supports sound preloading
         assets.loadManifest(assetManifest);
@@ -57,7 +56,6 @@ let Game = (function(){
      */
     function Start():void
     {
-        console.log(`%c Start Function`, "color: grey; font-size: 14px; font-weight: bold;");
         stage = new createjs.Stage(canvas);
         createjs.Ticker.framerate = Config.Game.FPS;
         createjs.Ticker.on('tick', Update);
@@ -80,8 +78,6 @@ let Game = (function(){
     /* This is the main function of the Game (where all the fun happens) */
     function Main():void
     {
-        console.log(`%c Main Function`, "color: grey; font-size: 14px; font-weight: bold;");
-
         gameInterface();
 
         gameInterfaceLogic();

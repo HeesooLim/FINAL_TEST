@@ -34,7 +34,6 @@ let Game = (function () {
         { id: "rollButton", src: "./Assets/images/rollButton.png" }
     ];
     function Preload() {
-        console.log(`%c Preload Function`, "color: grey; font-size: 14px; font-weight: bold;");
         assets = new createjs.LoadQueue(); // asset container 
         assets.installPlugin(createjs.Sound); // supports sound preloading
         assets.loadManifest(assetManifest);
@@ -46,7 +45,6 @@ let Game = (function () {
      * It sets the framerate to 60 FPS and sets up the main Game Loop (Update)
      */
     function Start() {
-        console.log(`%c Start Function`, "color: grey; font-size: 14px; font-weight: bold;");
         stage = new createjs.Stage(canvas);
         createjs.Ticker.framerate = Config.Game.FPS;
         createjs.Ticker.on('tick', Update);
@@ -63,7 +61,6 @@ let Game = (function () {
     }
     /* This is the main function of the Game (where all the fun happens) */
     function Main() {
-        console.log(`%c Main Function`, "color: grey; font-size: 14px; font-weight: bold;");
         gameInterface();
         gameInterfaceLogic();
     }
